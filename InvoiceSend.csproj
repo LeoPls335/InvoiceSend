@@ -8,8 +8,16 @@
   <ItemGroup>
     <None Remove="Swashbuckle.AspNetCore" />
     <None Remove="Swashbuckle.AspNetCore.Swagger" />
+    <None Remove="Entities\" />
+    <None Remove="Business.Interfaces\" />
+    <None Remove="Business\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Business.Interfaces\" />
+    <Folder Include="Business\" />
   </ItemGroup>
 </Project>

@@ -1,31 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "D:\\G\\InvoiceSend\\InvoiceSend.csproj": {}
+    "/Users/leopls/Documentos/GitHub/InvoiceSend/InvoiceSend/InvoiceSend.csproj": {}
   },
   "projects": {
-    "D:\\G\\InvoiceSend\\InvoiceSend.csproj": {
+    "/Users/leopls/Documentos/GitHub/InvoiceSend/InvoiceSend/InvoiceSend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\G\\InvoiceSend\\InvoiceSend.csproj",
+        "projectUniqueName": "/Users/leopls/Documentos/GitHub/InvoiceSend/InvoiceSend/InvoiceSend.csproj",
         "projectName": "InvoiceSend",
-        "projectPath": "D:\\G\\InvoiceSend\\InvoiceSend.csproj",
-        "packagesPath": "C:\\Users\\leona\\.nuget\\packages\\",
-        "outputPath": "D:\\G\\InvoiceSend\\obj\\",
+        "projectPath": "/Users/leopls/Documentos/GitHub/InvoiceSend/InvoiceSend/InvoiceSend.csproj",
+        "packagesPath": "/Users/leopls/.nuget/packages/",
+        "outputPath": "/Users/leopls/Documentos/GitHub/InvoiceSend/InvoiceSend/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\leona\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/leopls/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,6 +55,20 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.osx-x64",
+              "version": "[3.1.31, 3.1.31]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -68,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
         }
       }
     }
