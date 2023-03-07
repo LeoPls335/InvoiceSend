@@ -40,7 +40,7 @@ namespace InvoiceSend.Business
             {
                 EmailConfig emailConfig = _emailConfigRepository.GetConfiguration();
 
-                var toEmail = emailSend.Email;
+                var toEmail = string.IsNullOrEmpty(emailSend.Email) ? emailConfig.Email : emailSend.Email;
 
                 MailMessage mail = new MailMessage()
                 {
@@ -49,8 +49,8 @@ namespace InvoiceSend.Business
 
                 mail.To.Add(new MailAddress(toEmail));
 
-                if (!string.IsNullOrEmpty(emailSend.BccEmail))
-                    mail.Bcc.Add(new MailAddress(emailSend.BccEmail));
+                if (!string.IsNullOrEmpty(emailConfig.BccEmail))
+                    mail.Bcc.Add(new MailAddress(emailConfig.BccEmail));
 
                 if (attachments != null)
                 {
