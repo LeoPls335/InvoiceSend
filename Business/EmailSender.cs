@@ -4,18 +4,20 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using InvoiceSend.Business.Interfaces;
+using InvoiceSend.Data.Repositories;
 using InvoiceSend.Entities;
+using InvoiceSend.Model;
 using Microsoft.Extensions.Options;
 
 namespace InvoiceSend.Business
 {
     public class EmailSender : IEmailSender
     {
-        public EmailSettings _emailSettings { get; }
+        private readonly IEmailConfigRepository _emailConfigRepository;
 
-        public EmailSender(IOptions<EmailSettings> emailSettings)
+        public EmailSender(IEmailConfigRepository emailConfigRepository)
         {
-            _emailSettings = emailSettings.Value;
+            _emailConfigRepository = emailConfigRepository;
         }
 
         public Task SendEmailAsync(EmailSend emailSend)
@@ -36,17 +38,16 @@ namespace InvoiceSend.Business
         {
             try
             {
-                var toEmail = string.IsNullOrEmpty(emailSend.Email) ? _emailSettings.ToEmail : emailSend.Email;
+                EmailConfig emailConfig = _emailConfigRepository.GetConfiguration();
+
+                var toEmail = emailSend.Email;
 
                 MailMessage mail = new MailMessage()
                 {
-                    From = new MailAddress(_emailSettings.FromAddress, _emailSettings.FromName)
+                    From = new MailAddress(emailConfig.FromAddress, emailConfig.FromName)
                 };
 
                 mail.To.Add(new MailAddress(toEmail));
-
-                if (!string.IsNullOrEmpty(_emailSettings.CcEmail))
-                    mail.CC.Add(new MailAddress(_emailSettings.CcEmail));
 
                 if (!string.IsNullOrEmpty(emailSend.BccEmail))
                     mail.Bcc.Add(new MailAddress(emailSend.BccEmail));
@@ -64,11 +65,13 @@ namespace InvoiceSend.Business
                 mail.IsBodyHtml = true;
                 mail.Priority = MailPriority.Normal;
 
-                using (SmtpClient smtp = new SmtpClient(_emailSettings.ServerAddress, _emailSettings.ServerPort))
+                bool ssl = emailConfig.Encryption.Contains("tls") ? true : false;
+
+                using (SmtpClient smtp = new SmtpClient(emailConfig.Host, emailConfig.Port))
                 {
                     smtp.UseDefaultCredentials = false;
-                    smtp.Credentials = new NetworkCredential(_emailSettings.Username, _emailSettings.Password);
-                    smtp.EnableSsl = _emailSettings.ServerUseSsl;
+                    smtp.Credentials = new NetworkCredential(emailConfig.UserName, emailConfig.Password);
+                    smtp.EnableSsl = ssl;
 
                     await smtp.SendMailAsync(mail);
                 }

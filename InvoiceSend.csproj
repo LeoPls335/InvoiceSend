@@ -20,4 +20,8 @@
     <Folder Include="Business.Interfaces\" />
     <Folder Include="Business\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InvoiceSend.Data\InvoiceSend.Data.csproj" />
+    <ProjectReference Include="..\InvoiceSend.Model\InvoiceSend.Model.csproj" />
+  </ItemGroup>
 </Project>

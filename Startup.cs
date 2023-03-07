@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using InvoiceSend.Business;
 using InvoiceSend.Business.Interfaces;
+using InvoiceSend.Data;
+using InvoiceSend.Data.Repositories;
 using InvoiceSend.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,11 +35,13 @@ namespace InvoiceSend
             //Swagger
             AddSwagger(services);
 
-            //Settings
-            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
-
             //Interfaces
             services.AddTransient<IEmailSender, EmailSender>();
+
+            //Data
+            var oracleSQLConnectionConfiguration = new OracleSQLConfiguration(Configuration.GetConnectionString("OracleSQLConnection"));
+            services.AddSingleton(oracleSQLConnectionConfiguration);
+            services.AddScoped<IEmailConfigRepository, EmailConfigRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
