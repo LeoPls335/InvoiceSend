@@ -1,9 +1,5 @@
 ﻿using InvoiceSend.Model;
 using Oracle.ManagedDataAccess.Client;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InvoiceSend.Data.Repositories
 {
@@ -24,10 +20,15 @@ namespace InvoiceSend.Data.Repositories
 
             var db = dbConnection();
 
-            var sql = @"SELECT * FROM CONFIG"; 
+            var sql = @"SELECT ID, USUARIO, CORREO_PRINCIPAL, CORREO_COPIA_OCULTA,
+                               MAIL_DRIVER, MAIL_HOST, MAIL_PORT, MAIL_USERNAME,
+                               MAIL_PASSWORD, MAIL_ENCRYPTION, MAIL_FROM_ADDRESS,
+                               MAIL_FROM_NAME, MAILS_PER_EXECUTION, MAILS_PER_SECOND
+                               FROM NOTIFICACION_CORREO"; 
 
             var cmd = db.CreateCommand();
             cmd.CommandText = sql;
+            db.Open();
 
             OracleDataReader reader = cmd.ExecuteReader();
 
@@ -45,8 +46,8 @@ namespace InvoiceSend.Data.Repositories
                 emailConfig.Encryption = reader.GetString(9);
                 emailConfig.FromAddress = reader.GetString(10);
                 emailConfig.FromName = reader.GetString(11);
-                emailConfig.Excution = reader.GetInt32(12);
-                emailConfig.Second = reader.GetInt32(13);
+                emailConfig.Excution = reader.GetString(12);
+                emailConfig.Second = reader.GetString(13);
             }
 
             return emailConfig;

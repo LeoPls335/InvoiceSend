@@ -49,7 +49,7 @@ namespace InvoiceSend.Business
 
                 mail.To.Add(new MailAddress(toEmail));
 
-                if (!string.IsNullOrEmpty(emailConfig.BccEmail))
+                if (string.IsNullOrEmpty(emailSend.Email))
                     mail.Bcc.Add(new MailAddress(emailConfig.BccEmail));
 
                 if (attachments != null)
@@ -69,6 +69,8 @@ namespace InvoiceSend.Business
 
                 using (SmtpClient smtp = new SmtpClient(emailConfig.Host, emailConfig.Port))
                 {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                    ServicePointManager.Expect100Continue = false;
                     smtp.UseDefaultCredentials = false;
                     smtp.Credentials = new NetworkCredential(emailConfig.UserName, emailConfig.Password);
                     smtp.EnableSsl = ssl;

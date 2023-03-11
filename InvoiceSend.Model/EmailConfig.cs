@@ -18,7 +18,7 @@ namespace InvoiceSend.Model
         public string Encryption { get; set; }
         public string FromAddress { get; set; }
         public string FromName { get; set; }
-        public int Excution { get; set; }
-        public int Second { get; set; }
+        public string Excution { get; set; }
+        public string Second { get; set; }
     }
 }
